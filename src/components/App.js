@@ -6,6 +6,7 @@ import Dashboard from './Dashboard'
 import LoadingBar from 'react-redux-loading'
 import NewTweet from './NewTweet'
 import TweetPage from './TweetPage'
+import LeaderBoard from './LeaderBoard'
 import Nav from './Nav'
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
                   <Route path='/' exact component={Dashboard} />
                   <Route path='/tweet/:id' component={TweetPage} />
                   <Route path='/new' component={NewTweet} />
+                  <Route path='/leaderboard' component={LeaderBoard} />
                 </div>}
           </div>
         </Fragment>

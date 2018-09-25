@@ -15,6 +15,11 @@ export default function Nav () {
             New Tweet
           </NavLink>
         </li>
+        <li>
+          <NavLink to='/leaderboard' activeClassName='active'>
+            Leader Board
+          </NavLink>
+        </li>
       </ul>
     </nav>
   )
