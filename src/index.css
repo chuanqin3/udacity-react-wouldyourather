@@ -47,6 +47,12 @@ a {
   font-weight: bold;
 }
 
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
 .nav ul {
   display: flex;
   flex-direction: row;

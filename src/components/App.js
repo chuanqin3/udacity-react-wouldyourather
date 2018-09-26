@@ -8,6 +8,7 @@ import NewTweet from './NewTweet'
 import TweetPage from './TweetPage'
 import LeaderBoard from './LeaderBoard'
 import Nav from './Nav'
+import LogStatus from './LogStatus'
 
 class App extends Component {
   // load the state from Store
@@ -22,7 +23,10 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <div className='container'>
-            <Nav />
+            <div className='top-bar'>
+              <div><Nav /></div>
+              <div><LogStatus /></div>
+            </div>
             {/* if authedUser in the state is not fetched/updated, it will be null.
             so loading will be set to true before the state is updated */}
             {this.props.loading === true

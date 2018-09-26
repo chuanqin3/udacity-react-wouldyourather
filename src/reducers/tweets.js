@@ -1,11 +1,11 @@
-import { RECEIVE_TWEETS, TOGGLE_TWEET, ADD_TWEET } from '../actions/tweets'
+import { RECEIVE_QUESTIONS, TOGGLE_TWEET, ADD_TWEET } from '../actions/tweets'
 
-export default function tweets (state = {}, action) {
+export default function questions (state = {}, action) {
   switch(action.type) {
-    case RECEIVE_TWEETS :
+    case RECEIVE_QUESTIONS :
       return {
         ...state,
-        ...action.tweets
+        ...action.questions
       }
     case TOGGLE_TWEET :
       return {

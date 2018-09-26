@@ -1,25 +1,25 @@
 import {
   _getUsers,
-  _getTweets,
-  _saveLikeToggle,
-  _saveTweet,
-} from './_DATA.js'
+  _getQuestions,
+  _saveQuestionAnswer,
+  _saveQuestion,
+} from './_DATA2.js'
 
 // returns a single Promise that resolves when all of the promises in the iterable argument have resolved
 export function getInitialData () {
   return Promise.all([
     _getUsers(),
-    _getTweets(),
-  ]).then(([users, tweets]) => ({
+    _getQuestions(),
+  ]).then(([users, questions]) => ({
     users,
-    tweets,
+    questions,
   }))
 }
 
-export function saveLikeToggle (info) {
-  return _saveLikeToggle(info)
+export function saveQuestionAnswer (info) {
+  return _saveQuestionAnswer(info)
 }
 
-export function saveTweet (info) {
-  return _saveTweet(info)
+export function saveQuestion (info) {
+  return _saveQuestion(info)
 }
