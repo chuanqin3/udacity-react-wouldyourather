@@ -4,6 +4,7 @@ import { formatQuestion, formatDate } from '../utils/_DATA2'
 import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline} from 'react-icons/ti/index'
 import { handleToggleTweet } from '../actions/tweets'
 import { Link, withRouter } from 'react-router-dom'
+import { Progress } from 'semantic-ui-react'
 
 class Tweet extends Component {
   handleLike = (e) => {
@@ -57,9 +58,7 @@ class Tweet extends Component {
               {optionTwo.text}
             </button>
           </div>
-          <div>
-            {optionOne.votes.length}
-          </div>
+          <Progress progress='value' value={optionOne.votes.length} />
         </div>
       </div>
       // <Link to={`/tweet/${id}`} className='tweet'>
