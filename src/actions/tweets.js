@@ -13,11 +13,12 @@ function addTweet (tweet) {
   }
 }
 
-export function voteQuestion ({ id, authedUser }) {
+export function voteQuestion ({ id, authedUser, option }) {
   return {
     type: VOTE_QUESTION,
     id,
     authedUser,
+    option,
   }
 }
 

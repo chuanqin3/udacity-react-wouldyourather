@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion, formatDate } from '../utils/_DATA2'
 import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline} from 'react-icons/ti/index'
-import { handleToggleTweet } from '../actions/tweets'
+import { handleToggleTweet, voteQuestion } from '../actions/tweets'
 import { Link, withRouter } from 'react-router-dom'
 import { Progress } from 'semantic-ui-react'
 
@@ -17,6 +17,21 @@ class Tweet extends Component {
     //   hasLiked: tweet.hasLiked,
     //   authedUser
     // }))
+  }
+
+  handleVote = (e) => {
+    e.preventDefault()
+
+    const { dispatch, question, authedUser } = this.props
+    let option = e.target.name;
+
+    console.log(option)
+
+    dispatch(voteQuestion({
+      option,
+      authedUser,
+      id: question.id
+    }))
   }
 
   // toParent = (e, id) => {
@@ -51,10 +66,10 @@ class Tweet extends Component {
         <div>
           <span>Would you rather?</span>
           <div>
-            <button class='ui button' role='button'>
+            <button class='ui button' role='button' onClick={this.handleVote} name="one">
               {optionOne.text}
             </button>
-            <button class='ui button' role='button'>
+            <button class='ui button' role='button' onClick={this.handleVote} name="two">
               {optionTwo.text}
             </button>
           </div>
