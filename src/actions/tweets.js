@@ -4,11 +4,20 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const TOGGLE_TWEET = 'TOGGLE_TWEET'
 export const ADD_TWEET = 'ADD_TWEET'
+export const VOTE_QUESTION = 'VOTE_QUESTION'
 
 function addTweet (tweet) {
   return {
     type: ADD_TWEET,
     tweet,
+  }
+}
+
+export function voteQuestion ({ id, authedUser }) {
+  return {
+    type: VOTE_QUESTION,
+    id,
+    authedUser,
   }
 }
 
