@@ -1,31 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion, formatDate } from '../utils/_DATA2'
-import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline} from 'react-icons/ti/index'
-import { handleToggleTweet, voteQuestion } from '../actions/tweets'
+// import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline} from 'react-icons/ti/index'
+import { voteQuestion } from '../actions/tweets'
 import { Link, withRouter } from 'react-router-dom'
 import { Progress } from 'semantic-ui-react'
 
 class Tweet extends Component {
-  handleLike = (e) => {
-    e.preventDefault()
-    // handle like events
-    // const { dispatch, tweet, authedUser } = this.props
-
-    // dispatch(handleToggleTweet({
-    //   id: tweet.id,
-    //   hasLiked: tweet.hasLiked,
-    //   authedUser
-    // }))
-  }
-
   handleVote = (e) => {
     e.preventDefault()
 
     const { dispatch, question, authedUser } = this.props
     let option = e.target.name;
-
-    console.log(option)
 
     dispatch(voteQuestion({
       option,
@@ -34,12 +20,6 @@ class Tweet extends Component {
     }))
   }
 
-  // toParent = (e, id) => {
-  //   e.preventDefault()
-  //   // todo: redirect to parent
-  //   this.props.history.push(`/question/${id}`)
-  // }
-
   render() {
     const { question, user } = this.props
 
@@ -47,14 +27,12 @@ class Tweet extends Component {
       return <p>This question doesn't exist</p>
     }
 
-    console.log("hey!", this.props)
+    console.log("hey! This props is ", this.props)
 
     // destructing the tweet Object
     const {
       author, timestamp, id, optionOne, optionTwo
     } = question
-
-    console.log("kaka! ", optionOne)
 
     return (
       <div>
@@ -114,9 +92,7 @@ class Tweet extends Component {
 // use the id from Dashboard to query the relevant tweets from the state of Store
 function mapStateToProps ({authedUser, users, questions}, { id }) {
   const question = questions[id]
-  console.log("momo! ", question)
   const user = users[question.author]
-  console.log("wawa! ", user)
 
   return {
     authedUser,

@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Tweet from './Tweet'
-import NewTweet from './NewTweet'
+import NewQuestion from './NewQuestion'
 
-class TweetPage extends Component {
+class QuestionPage extends Component {
   render() {
     console.log(this.props)
     const { id, replies } = this.props
 
     return (
       <div>
-        <Tweet id={id} />
-        <NewTweet id={id} />
+        <NewQuestion id={id} />
         {replies.length !== 0 && <h3 className='center'>Replies</h3> }
         <ul>
           {replies.map((replyId) => (
@@ -36,4 +35,4 @@ function mapStateToProps ({ authedUser, tweets, users }, props) {
   }
 }
 
-export default connect(mapStateToProps)(TweetPage)
+export default connect(mapStateToProps)(QuestionPage)
