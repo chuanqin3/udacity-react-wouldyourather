@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS, VOTE_QUESTION, TOGGLE_TWEET, ADD_QUESTION } from '../actions/tweets'
+import { RECEIVE_QUESTIONS, VOTE_QUESTION, ADD_QUESTION } from '../actions/questions'
 
 export default function questions (state = {}, action) {
   switch(action.type) {
@@ -8,8 +8,6 @@ export default function questions (state = {}, action) {
         ...action.questions
       }
     case ADD_QUESTION :
-      console.log(action.question)
-
       return {
         ...state,
         [action.question.id]: action.question

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { voteQuestion } from '../actions/tweets'
+import { voteQuestion } from '../actions/questions'
 import { Link, withRouter } from 'react-router-dom'
 
 class QuestionList extends Component {

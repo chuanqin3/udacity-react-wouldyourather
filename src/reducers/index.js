@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux'
 import authedUser from './authedUser'
 import users from './users'
-import questions from './tweets'
+import questions from './questions'
 import { loadingBarReducer } from 'react-redux-loading'
 
 // below is the state! It used the ES6 shorthand to define the state properties
