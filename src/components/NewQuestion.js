@@ -53,6 +53,7 @@ class NewQuestion extends Component {
 
     return (
       <div>
+        <h3 className='center'>Compose a new Would You Rather poll</h3>
         <form className='ui form' onSubmit={this.handleSubmit}>
           <div className='field'>
             <label>First Option</label>
@@ -72,7 +73,7 @@ class NewQuestion extends Component {
               You can input {wordsLeft2} more letters
             </div>
           )}
-          <button type='submit' className='ui button' disabled={(text1 && text2) === ''}>
+          <button type='submit' className='ui button' disabled={text1 === '' || text2 === ''}>
             Submit
           </button>
         </form>

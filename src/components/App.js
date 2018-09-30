@@ -34,7 +34,7 @@ class App extends Component {
               : <div>
                   <Route path='/' exact component={Dashboard} />
                   <Route path='/questions/:id' component={QuestionPage} />
-                  <Route path='/new' component={NewQuestion} />
+                  <Route path='/add' component={NewQuestion} />
                   <Route path='/leaderboard' component={LeaderBoard} />
                 </div>}
           </div>
@@ -45,8 +45,9 @@ class App extends Component {
 }
 
 // take the authedUser from the state of Store, pass to App Component as loading
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ authedUser, users }) {
   return {
+    authedUserInfo: users[authedUser],
     // if authedUser is null, return true; otherwise, false
     loading: authedUser === null
   }

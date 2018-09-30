@@ -44,10 +44,10 @@ class Tweet extends Component {
         <div>
           <span>Would you rather?</span>
           <div>
-            <button class='ui button' role='button' onClick={this.handleVote} name="one">
+            <button className='ui button toggle' onClick={this.handleVote} name="one">
               {optionOne.text}
             </button>
-            <button class='ui button' role='button' onClick={this.handleVote} name="two">
+            <button className='ui button toggle' onClick={this.handleVote} name="two">
               {optionTwo.text}
             </button>
           </div>
