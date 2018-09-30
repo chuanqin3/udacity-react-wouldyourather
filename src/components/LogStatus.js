@@ -6,7 +6,7 @@ class LogStatus extends Component {
 		console.log("log prop is ", this.props)
 		return (
 			<div>
-				Hello, {this.props.userName}
+				Hello, {this.props.authedUser}
 			</div>
 		)
 	}
