@@ -7,7 +7,7 @@ class LeaderBoard extends Component {
     console.log("leaderboard prop is ", this.props)
     return (
       <div>
-        <h3>Leaderboard</h3>
+        <h3>Leader Board</h3>
         <ul className='dashboard-list'>
           {this.props.userId.map((id) => (
             <li key={id}>
@@ -27,11 +27,9 @@ function mapStateToProps({ users }) {
     return Object.keys(users[each].answers).length + users[each].questions.length
   })
 
+  // create a sorting object
   let userScore = {};
   userId.forEach((id, count) => userScore[id] = totalScore[count]);
-
-  console.log(userScore)
-  console.log(userScore["sarahedo"])
 
   // sort the user on leaderboard based on their total score
   userId.sort((a,b) => userScore[b] - userScore[a])

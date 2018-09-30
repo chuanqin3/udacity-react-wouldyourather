@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Tweet from './Tweet'
-import NewQuestion from './NewQuestion'
 
 class UserScore extends Component {
   render() {
@@ -59,8 +57,6 @@ function mapStateToProps({ users }, { id }) {
   //   createdCount: createdCount[count],
   //   totalScore: totalScore[count],
   // });
-
-  console.log(username)
 
   return {
     username,

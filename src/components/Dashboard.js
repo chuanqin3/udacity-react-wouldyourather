@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Tweet from './Tweet'
+import QuestionList from './QuestionList'
 import { Checkbox } from 'semantic-ui-react'
 
 class Dashboard extends Component {
@@ -24,7 +24,7 @@ class Dashboard extends Component {
           <ul className='dashboard-list'>
             {this.props.unansweredQuestionsId.map((id) => (
               <li key={id}>
-                <Tweet id={id}/>
+                <QuestionList id={id}/>
               </li>
             ))}
           </ul>
@@ -32,7 +32,7 @@ class Dashboard extends Component {
           <ul className='dashboard-list'>
             {this.props.answeredQuestionsId.map((id) => (
               <li key={id}>
-                <Tweet id={id}/>
+                <QuestionList id={id}/>
               </li>
             ))}
           </ul>

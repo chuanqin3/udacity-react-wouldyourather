@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion, formatDate } from '../utils/_DATA2'
-// import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline} from 'react-icons/ti/index'
 import { voteQuestion } from '../actions/tweets'
 import { Link, withRouter } from 'react-router-dom'
-import { Progress } from 'semantic-ui-react'
 
-class Tweet extends Component {
-  handleVote = (e) => {
+class QuestionList extends Component {
+  handleVote = (e, id) => {
     e.preventDefault()
 
     const { dispatch, question, authedUser } = this.props
@@ -18,6 +15,9 @@ class Tweet extends Component {
       authedUser,
       id: question.id
     }))
+
+    // todo: redirect to poll detail page
+    this.props.history.push(`/questions/${id}`)
   }
 
   render() {
@@ -26,8 +26,6 @@ class Tweet extends Component {
     if (question === null) {
       return <p>This question doesn't exist</p>
     }
-
-    console.log("hey! This props is ", this.props)
 
     // destructing the tweet Object
     const {
@@ -41,18 +39,17 @@ class Tweet extends Component {
           alt={`Avatar of ${user.name}`}
           className='avatar'
         />
-        <div>
+        <Link to={`/questions/${id}`}>
           <span>Would you rather?</span>
           <div>
-            <button className='ui button toggle' onClick={this.handleVote} name="one">
+            <button className='ui button toggle' onClick={e => this.handleVote(e, id)} name="one">
               {optionOne.text}
             </button>
-            <button className='ui button toggle' onClick={this.handleVote} name="two">
+            <button className='ui button toggle' onClick={e => this.handleVote(e, id)} name="two">
               {optionTwo.text}
             </button>
           </div>
-          <Progress progress='value' value={optionOne.votes.length} />
-        </div>
+        </Link>
       </div>
       // <Link to={`/tweet/${id}`} className='tweet'>
         // <img
@@ -104,4 +101,4 @@ function mapStateToProps ({authedUser, users, questions}, { id }) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Tweet))
+export default withRouter(connect(mapStateToProps)(QuestionList))

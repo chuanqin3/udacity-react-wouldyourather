@@ -9,6 +9,7 @@ import QuestionPage from './QuestionPage'
 import LeaderBoard from './LeaderBoard'
 import Nav from './Nav'
 import LogStatus from './LogStatus'
+import LoginForm from './LoginForm'
 
 class App extends Component {
   // load the state from Store
@@ -25,17 +26,18 @@ class App extends Component {
           <div className='container'>
             <div className='top-bar'>
               <div><Nav /></div>
-              <div><LogStatus /></div>
             </div>
             {/* if authedUser in the state is not fetched/updated, it will be null.
             so loading will be set to true before the state is updated */}
             {this.props.loading === true
               ? null
               : <div>
+                  <div><LogStatus /></div>
                   <Route path='/' exact component={Dashboard} />
                   <Route path='/questions/:id' component={QuestionPage} />
                   <Route path='/add' component={NewQuestion} />
                   <Route path='/leaderboard' component={LeaderBoard} />
+                  <Route path='/login' component={LoginForm} />
                 </div>}
           </div>
         </Fragment>
@@ -47,7 +49,7 @@ class App extends Component {
 // take the authedUser from the state of Store, pass to App Component as loading
 function mapStateToProps ({ authedUser, users }) {
   return {
-    authedUserInfo: users[authedUser],
+    // authedUserInfo: users[authedUser],
     // if authedUser is null, return true; otherwise, false
     loading: authedUser === null
   }
