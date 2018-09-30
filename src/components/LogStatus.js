@@ -6,7 +6,10 @@ class LogStatus extends Component {
 		console.log("log prop is ", this.props)
 		return (
 			<div>
-				Hello, {this.props.authedUser}
+				<span>Hello, {this.props.authedUser}</span>
+				<button className='ui button toggle'>
+          Logout
+        </button>
 			</div>
 		)
 	}
