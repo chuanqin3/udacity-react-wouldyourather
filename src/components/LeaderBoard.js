@@ -4,10 +4,9 @@ import UserScore from './UserScore'
 
 class LeaderBoard extends Component {
   render() {
-    console.log("leaderboard prop is ", this.props)
     return (
       <div>
-        <h3>Leader Board</h3>
+        <h3 className='center'>Leader Board</h3>
         <ul className='dashboard-list'>
           {this.props.userId.map((id) => (
             <li key={id}>

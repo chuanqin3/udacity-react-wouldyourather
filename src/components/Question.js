@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleVoteQuestion } from '../actions/questions'
 import { Link, withRouter } from 'react-router-dom'
-import { Button } from 'semantic-ui-react'
+import { Button, Header, Grid, Image } from 'semantic-ui-react'
 
 class QuestionList extends Component {
   handleVote = (e, id) => {
@@ -35,20 +35,30 @@ class QuestionList extends Component {
 
     return (
       <Link to={`/questions/${id}`}>
-        <img
-          src={userInfo.avatarURL}
-          alt={`Avatar of ${userInfo.name}`}
-          className='avatar'
-        />
-        <span>Would you rather?</span>
-        <div>
-          <Button active={answeredByAuthedUserOrNotOne} disabled={answeredByAuthedUserOrNot} className='ui button toggle' onClick={e => this.handleVote(e, id)} name="optionOne">
-            {optionOne.text}
-          </Button>
-          <Button active={answeredByAuthedUserOrNotTwo} disabled={answeredByAuthedUserOrNot} className='ui button toggle' onClick={e => this.handleVote(e, id)} name="optionTwo">
-            {optionTwo.text}
-          </Button>
-        </div>
+        <Grid>
+          <Grid.Row>
+            <span>{userInfo.name} asks:</span>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Image
+                size='tiny'
+                src={userInfo.avatarURL}
+                alt={`Avatar of ${userInfo.name}`}
+                className='avatar'
+              />
+            </Grid.Column>
+            <Grid.Column width={13}>
+              <Header as='h5'>Would you rather...</Header>
+              <Button active={answeredByAuthedUserOrNotOne} disabled={answeredByAuthedUserOrNot} className='ui button toggle' onClick={e => this.handleVote(e, id)} name="optionOne">
+                {optionOne.text}
+              </Button>
+              <Button active={answeredByAuthedUserOrNotTwo} disabled={answeredByAuthedUserOrNot} className='ui button toggle' onClick={e => this.handleVote(e, id)} name="optionTwo">
+                {optionTwo.text}
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Link>
     )
   }

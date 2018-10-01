@@ -31,6 +31,13 @@ let users = {
         "6ni6ok3ym7mf1p33lnez": 'optionOne'
       },
       questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
+    },
+    guest: {
+      id: 'guest',
+      name: 'guest',
+      avatarURL: "https://uploads-ssl.webflow.com/570ea8434b6303f11790908f/5782a1cd7a0c1f8933add41a_iconAvatar.svg",
+      answers: {},
+      questions: [],
     }
   }
   

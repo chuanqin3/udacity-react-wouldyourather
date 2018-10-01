@@ -19,10 +19,10 @@ class Dashboard extends Component {
     const { questions, answeredQuestionsId, unansweredQuestionsId } = this.props
     let unansweredIdSorted = unansweredQuestionsId.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
     let answeredIdSorted = answeredQuestionsId.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+    
     return (
       <div>
-        <h3 className='center'>Would You Rather?</h3>
-        <span>Unanswered polls  </span><Checkbox slider label='Answered polls' onChange={this.handleViewToggle} />
+        <span className='view-toggle'>Unanswered polls</span><Checkbox slider label='Answered polls' onChange={this.handleViewToggle} />
         { this.state.showUnanswered ?
           <ul className='dashboard-list'>
             {unansweredIdSorted.map((id) => (

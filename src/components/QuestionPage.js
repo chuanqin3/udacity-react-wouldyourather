@@ -1,26 +1,53 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Progress } from 'semantic-ui-react'
+import { Progress, Image, Grid, Header } from 'semantic-ui-react'
 
 class QuestionPage extends Component {
   render() {
-    const { username, optionOne, optionTwo, avatarURL } = this.props
+    const { authedUser, username, optionOne, optionTwo, avatarURL } = this.props
     const totalVotesCount = optionOne.votes.length + optionTwo.votes.length
+    const optionOnePercent = (optionOne.votes.length / totalVotesCount) * 100
+    let authedUserChoice = "You would rather "
+    if (optionOne.votes.indexOf(authedUser) !== -1) {
+      authedUserChoice = authedUserChoice.concat(optionOne.text)
+    } else if (optionTwo.votes.indexOf(authedUser) !== -1) {
+      authedUserChoice = authedUserChoice.concat(optionTwo.text)
+    } else {
+      authedUserChoice = "You have not voted yet! Please go back to the Homepage and vote."
+    }
 
     return (
-      <div>
-        <h3>Would You Rather?</h3>
-        <div>
-          <img
-            src={avatarURL}
-            alt={`Avatar of ${username}`}
-            className='avatar'
-          />
-          <h5>Posted by {username}</h5>
-        </div>
-        <Progress progress='value' value={optionOne.votes.length} >{optionOne.text}</Progress>
-        <Progress progress='value' value={optionTwo.votes.length} >{optionTwo.text}</Progress>
-      </div>
+      <Grid>
+        <Grid.Row>
+          <Header as='h3' textAlign='center'>Would You Rather?</Header>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <Image
+              size='tiny'
+              src={avatarURL}
+              alt={`Avatar of ${username}`}
+              className='avatar'
+            />
+            <Header as='h5'>Posted by {username}</Header>
+          </Grid.Column>
+          <Grid.Column width={13}>
+            <Grid.Row>
+              <span>{authedUserChoice}</span>
+            </Grid.Row>
+            <Grid.Row>
+              <span>Below bar showed how many answerers rather {optionOne.text}...</span>
+            </Grid.Row>
+            <Grid.Row>
+              <Progress percent={optionOnePercent} progress>
+                Out of {totalVotesCount} people who answered, 
+                {optionOne.votes.length} rather {optionOne.text}, 
+                {optionTwo.votes.length} rather {optionTwo.text}
+              </Progress>
+            </Grid.Row>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }
@@ -35,14 +62,11 @@ function mapStateToProps ({ authedUser, questions, users }, props) {
 
   return {
     id,
+    authedUser,
     optionOne,
     optionTwo,
     username,
     avatarURL,
-    // replies: !tweets[id]
-    //   ? []
-    //   : tweets[id].replies.sort((a, b, ) => tweets[b].timestamp - tweets[a].timestamp)
-
   }
 }
 

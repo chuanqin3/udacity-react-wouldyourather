@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Grid, Image } from 'semantic-ui-react'
 
 class UserScore extends Component {
   render() {
@@ -8,20 +9,32 @@ class UserScore extends Component {
     } = this.props
 
     return (
-      <div>
-        <img
-          src={avatarURL}
-          alt={`Avatar of ${username}`}
-          className='avatar'
-        />
-        <div>
-          <span>Answered {answeredCount} polls</span>
-          <span>Created {createdCount} polls</span>
-        </div>
-        <div>
-          Score {totalScore}
-        </div>
-      </div>
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <Image
+              size='tiny'
+              src={avatarURL}
+              alt={`Avatar of ${username}`}
+              className='avatar'
+            />
+          </Grid.Column>
+          <Grid.Column width={2}>
+            {username}
+          </Grid.Column>
+          <Grid.Column width={5}>
+            <Grid.Row>
+              <span>Answered {answeredCount} polls</span>
+            </Grid.Row>
+            <Grid.Row>
+              <span>Created {createdCount} polls</span>
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column width={2}>
+            Score {totalScore}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }

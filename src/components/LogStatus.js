@@ -13,14 +13,13 @@ class LogStatus extends Component {
 
 	render() {
 		const { userInfo, authedUser } = this.props
+		console.log(authedUser)
 		return (
-			<div>
-				{authedUser === null
-					? <span>Hello, guest</span>
-					: <Fragment>
-							<span>Hello, {userInfo.name}</span>
-							<button className='ui button toggle' onClick={this.jumpToLoginPage}>Logout</button>
-						</Fragment>
+			<div className='right'>
+				<span>Hello, {userInfo.name}</span>
+				{authedUser !== 'guest'
+					? <Button basic compact onClick={this.jumpToLoginPage}>Logout</Button>
+					: <Button basic compact onClick={this.jumpToLoginPage}>Log In</Button>
 				}
 			</div>
 		)
@@ -29,12 +28,10 @@ class LogStatus extends Component {
 
 function mapStateToProps({ users, authedUser }) {
 	const userInfo = users[authedUser]
-	// const username = users[authedUser].name
 
 	return {
 		authedUser,
 		userInfo,
-		// userName: typeof(users[authedUser] !== undefined) ? users[authedUser].name : "",
 	}
 }
 

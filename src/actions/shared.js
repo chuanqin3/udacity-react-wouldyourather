@@ -4,7 +4,7 @@ import { receiveQuestions } from './questions'
 import { setAuthedUser } from '../actions/authedUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
-const AUTHED_ID = 'tylermcginnis'
+const AUTHED_ID = 'guest'
 
 // below is a thunk action creator, whose basic format is:
 // function handleInitialData () {
