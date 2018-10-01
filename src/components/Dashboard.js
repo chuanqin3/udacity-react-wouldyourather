@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import QuestionList from './QuestionList'
+import Question from './Question'
 import { Checkbox } from 'semantic-ui-react'
 
 class Dashboard extends Component {
@@ -16,23 +16,26 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { questions, answeredQuestionsId, unansweredQuestionsId } = this.props
+    let unansweredIdSorted = unansweredQuestionsId.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+    let answeredIdSorted = answeredQuestionsId.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
     return (
       <div>
         <h3 className='center'>Would You Rather?</h3>
         <span>Unanswered polls  </span><Checkbox slider label='Answered polls' onChange={this.handleViewToggle} />
         { this.state.showUnanswered ?
           <ul className='dashboard-list'>
-            {this.props.unansweredQuestionsId.map((id) => (
+            {unansweredIdSorted.map((id) => (
               <li key={id}>
-                <QuestionList id={id}/>
+                <Question id={id}/>
               </li>
             ))}
           </ul>
           :
           <ul className='dashboard-list'>
-            {this.props.answeredQuestionsId.map((id) => (
+            {answeredIdSorted.map((id) => (
               <li key={id}>
-                <QuestionList id={id}/>
+                <Question id={id}/>
               </li>
             ))}
           </ul>
@@ -44,21 +47,18 @@ class Dashboard extends Component {
 
 // Object.keys() method returns an array of a given object's own property names
 function mapStateToProps ({ authedUser, questions }) {
-  // const answeredQuestionsId: Object.keys(questions).filter(e => e.optionOne.length === 0 && e.optionOne.length === 0)
+  const allQuestionIds = Object.keys(questions)
 
   return {
-    answeredQuestionsId: Object.keys(questions)
+    questions,
+    answeredQuestionsId: allQuestionIds
       .filter(each =>
         questions[each].optionOne.votes.indexOf(authedUser) !== -1 || questions[each].optionTwo.votes.indexOf(authedUser) !== -1
-      )
-      .sort((a,b) => questions[b].timestamp - questions[a].timestap),
-    unansweredQuestionsId: Object.keys(questions)
+      ),
+    unansweredQuestionsId: allQuestionIds
       .filter(each =>
         questions[each].optionOne.votes.indexOf(authedUser) === -1 && questions[each].optionTwo.votes.indexOf(authedUser) === -1
       )
-      .sort((a,b) => questions[b].timestamp - questions[a].timestap),
-    allQuestionIds: Object.keys(questions)
-      .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
   }
 }
 
