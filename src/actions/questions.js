@@ -4,21 +4,11 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const VOTE_QUESTION = 'VOTE_QUESTION'
 export const ADD_QUESTION = 'ADD_QUESTION'
-export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER'
 
 function addQuestion (question) {
   return {
     type: ADD_QUESTION,
     question,
-  }
-}
-
-export function voteQuestion ({ id, authedUser, option }) {
-  return {
-    type: VOTE_QUESTION,
-    id,
-    authedUser,
-    option,
   }
 }
 
@@ -33,7 +23,7 @@ export function handleAddQuestion (text1, text2) {
       optionTwoText: text2,
       author: authedUser,
     })
-      .then((question) => dispatch(addQuestion(question)))
+      .then((questions) => dispatch(addQuestion(questions)))
       .then(() => dispatch(hideLoading()))
   }
 }
@@ -45,16 +35,28 @@ export function receiveQuestions (questions) {
   }
 }
 
-// export function handleSaveQuestionAnswer () {
-//   return (dispatch, getState) => {
-//     const { authedUser } = getState()
+export function voteQuestion ({ authedUser, qid, answer }) {
+  return {
+    type: VOTE_QUESTION,
+    authedUser,
+    qid,
+    answer,
+  }
+}
 
-//     dispatch(showLoading())
+export function handleVoteQuestion ({ qid, answer }) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState()
 
-//     return saveQuestionAnswer({
-//       authedUser,
-//       qid,
-//       answer,
-//     })
-//   }
-// }
+    dispatch(showLoading())
+
+    return saveQuestionAnswer({
+      authedUser,
+      qid,
+      // answer is either 'optionOne' or 'optionTwo'
+      answer,
+    })
+      .then(() => dispatch(voteQuestion({ authedUser, qid, answer })))
+      .then(() => dispatch(hideLoading()))
+  }
+}

@@ -4,7 +4,6 @@ import { Progress } from 'semantic-ui-react'
 
 class QuestionPage extends Component {
   render() {
-    console.log(this.props)
     const { username, optionOne, optionTwo, avatarURL } = this.props
     const totalVotesCount = optionOne.votes.length + optionTwo.votes.length
 

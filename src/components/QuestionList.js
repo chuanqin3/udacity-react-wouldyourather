@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { voteQuestion } from '../actions/questions'
+import { handleVoteQuestion } from '../actions/questions'
 import { Link, withRouter } from 'react-router-dom'
 
 class QuestionList extends Component {
@@ -10,10 +10,11 @@ class QuestionList extends Component {
     const { dispatch, question, authedUser } = this.props
     let option = e.target.name;
 
-    dispatch(voteQuestion({
-      option,
-      authedUser,
-      id: question.id
+    dispatch(handleVoteQuestion({
+      // authedUser,
+      // id: question.id
+      qid: question.id,
+      answer: option,
     }))
 
     // todo: redirect to poll detail page
@@ -42,10 +43,10 @@ class QuestionList extends Component {
         <Link to={`/questions/${id}`}>
           <span>Would you rather?</span>
           <div>
-            <button className='ui button toggle' onClick={e => this.handleVote(e, id)} name="one">
+            <button className='ui button toggle' onClick={e => this.handleVote(e, id)} name="optionOne">
               {optionOne.text}
             </button>
-            <button className='ui button toggle' onClick={e => this.handleVote(e, id)} name="two">
+            <button className='ui button toggle' onClick={e => this.handleVote(e, id)} name="optionTwo">
               {optionTwo.text}
             </button>
           </div>
