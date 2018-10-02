@@ -5,7 +5,8 @@ import { Message } from 'semantic-ui-react'
 
 class LoginForm extends Component {
   render() {
-    const { userIds, avatarURL, username } = this.props
+    let { userIds } = this.props
+    userIds = userIds.filter(each => each !== 'guest')
 
     return (
       <div>
@@ -30,8 +31,8 @@ function mapStateToProps ({ users }) {
 
   return {
     userIds,
-    avatarURL: userIds.map(each => users[each].avatarURL),
-    username: userIds.map(each => users[each].name),
+    // avatarURL: userIds.map(each => users[each].avatarURL),
+    // username: userIds.map(each => users[each].name),
   }
 }
 

@@ -5,7 +5,6 @@ import { setAuthedUser } from '../actions/authedUser';
 
 class UserCard extends Component {
   logInUser = (e, id) => {
-    console.log(id)
     const { dispatch } = this.props
     dispatch(setAuthedUser(id))
   }

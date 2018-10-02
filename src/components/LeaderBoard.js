@@ -20,7 +20,7 @@ class LeaderBoard extends Component {
 }
 
 function mapStateToProps({ users }) {
-  const userId = Object.keys(users)
+  const userId = Object.keys(users).filter(each => each !== 'guest')
 
   const totalScore = userId.map(each => {
     return Object.keys(users[each].answers).length + users[each].questions.length
