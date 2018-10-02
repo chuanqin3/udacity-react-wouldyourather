@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Image, Button } from 'semantic-ui-react'
+import { setAuthedUser } from '../actions/authedUser';
 
 class UserCard extends Component {
+  logInUser = (e, id) => {
+    console.log(id)
+    const { dispatch } = this.props
+    dispatch(setAuthedUser(id))
+  }
+
   render() {
     const { userInfo } = this.props
     const avatarURL = userInfo.avatarURL
     const username = userInfo.name
+    const userId = userInfo.id
 
     return (
       <Grid>
@@ -23,7 +31,7 @@ class UserCard extends Component {
             <Grid.Row>
               {username}
             </Grid.Row>
-            <Button>Log in as this user</Button>
+            <Button onClick={e => this.logInUser(e, userId)}>Log in as this user</Button>
           </Grid.Column>
         </Grid.Row>
       </Grid>
