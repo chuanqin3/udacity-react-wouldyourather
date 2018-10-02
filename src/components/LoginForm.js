@@ -1,19 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import UserCard from './UserCard'
+import { Message } from 'semantic-ui-react'
 
 class LoginForm extends Component {
   render() {
     const { userIds, avatarURL, username } = this.props
 
     return (
-      <ul className='dashboard-list'>
-        {userIds.map((id) => (
-          <li key={id}>
-            <UserCard id={id}/>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <Message warning>
+          <Message.Header>You must log in to view, vote, and create polls!</Message.Header>
+          <p>...but you can still see the Leader Board as a guest</p>
+        </Message>
+        <ul className='dashboard-list'>
+          {userIds.map((id) => (
+            <li key={id}>
+              <UserCard id={id}/>
+            </li>
+          ))}
+        </ul>
+      </div>
     )
   }
 }
