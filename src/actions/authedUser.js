@@ -9,3 +9,4 @@ export function setAuthedUser (id) {
     id,
   }
 }
+
