@@ -5,15 +5,18 @@ import { Message } from 'semantic-ui-react'
 
 class LoginForm extends Component {
   render() {
-    let { userIds } = this.props
+    let { userIds, authedUser } = this.props
     userIds = userIds.filter(each => each !== 'guest')
 
     return (
       <div>
-        <Message warning>
-          <Message.Header>You must log in to view, vote, and create polls!</Message.Header>
-          <p>...but you can still see the Leader Board as a guest</p>
-        </Message>
+        {authedUser === 'guest'
+          ? <Message warning>
+              <Message.Header>You must log in to view, vote, and create polls!</Message.Header>
+              <p>...but you can still see the Leader Board as a guest</p>
+            </Message>
+          : null
+        }
         <ul className='dashboard-list'>
           {userIds.map((id) => (
             <li key={id}>
@@ -26,13 +29,12 @@ class LoginForm extends Component {
   }
 }
 
-function mapStateToProps ({ users }) {
+function mapStateToProps ({ users, authedUser }) {
   const userIds = Object.keys(users)
 
   return {
+    authedUser,
     userIds,
-    // avatarURL: userIds.map(each => users[each].avatarURL),
-    // username: userIds.map(each => users[each].name),
   }
 }
 
