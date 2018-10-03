@@ -28,7 +28,7 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <span className='view-toggle'>Unanswered polls</span><Checkbox slider label='Answered polls' onChange={this.handleViewToggle} />
+        <span className='one-space-after'>Unanswered polls</span><Checkbox slider label='Answered polls' onChange={this.handleViewToggle} />
         { this.state.showUnanswered ?
           <ul className='dashboard-list'>
             {unansweredIdSorted.map((id) => (

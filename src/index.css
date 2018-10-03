@@ -42,3 +42,8 @@ li {
   border-radius: 25px;
   margin: 10px;
 }
+
+/* used to add space after 'Unanswered polls' */
+.one-space-after {
+  margin-right: 1em;
+}
