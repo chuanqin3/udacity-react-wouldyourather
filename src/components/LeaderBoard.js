@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import UserScore from './UserScore'
+import { Redirect } from 'react-router-dom'
 
 class LeaderBoard extends Component {
   render() {
+    const { authedUser } = this.props
+    if (authedUser === 'guest') {
+      return <Redirect to='/login' />
+    }
+
     return (
       <div>
         <h3 className='center'>Leader Board</h3>
@@ -19,7 +25,7 @@ class LeaderBoard extends Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ authedUser, users }) {
   const userId = Object.keys(users).filter(each => each !== 'guest')
 
   const totalScore = userId.map(each => {
@@ -34,6 +40,7 @@ function mapStateToProps({ users }) {
   userId.sort((a,b) => userScore[b] - userScore[a])
 
   return {
+    authedUser,
     userId,
   }
 }

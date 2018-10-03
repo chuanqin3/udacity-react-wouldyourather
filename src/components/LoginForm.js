@@ -13,7 +13,6 @@ class LoginForm extends Component {
         {authedUser === 'guest'
           ? <Message warning>
               <Message.Header>You must log in to view, vote, and create polls!</Message.Header>
-              <p>...but you can still see the Leader Board as a guest</p>
             </Message>
           : null
         }
