@@ -5,6 +5,11 @@ import { Progress, Image, Grid, Header } from 'semantic-ui-react'
 class QuestionPage extends Component {
   render() {
     const { authedUser, username, optionOne, optionTwo, avatarURL } = this.props
+
+    if (optionOne === null || optionTwo === null) {
+      return <p>This question doesn't exist. Make sure you type the correct url!</p>
+    }
+
     const totalVotesCount = optionOne.votes.length + optionTwo.votes.length
     const optionOnePercent = Math.round((optionOne.votes.length / totalVotesCount) * 100)
     let authedUserChoice = "You would rather "
@@ -54,11 +59,11 @@ class QuestionPage extends Component {
 
 function mapStateToProps ({ authedUser, questions, users }, props) {
   const { id } = props.match.params
-  const optionOne = questions[id].optionOne
-  const optionTwo = questions[id].optionTwo
-  const authorId = questions[id].author
-  const username = users[authorId].name
-  const avatarURL = users[authorId].avatarURL
+  const optionOne = questions[id] ? questions[id].optionOne : null
+  const optionTwo = questions[id] ? questions[id].optionTwo : null
+  const authorId = questions[id] ? questions[id].author : null
+  const username = users[authorId] ? users[authorId].name : null
+  const avatarURL = users[authorId] ? users[authorId].avatarURL : null
 
   return {
     id,

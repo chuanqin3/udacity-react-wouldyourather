@@ -11,7 +11,7 @@ class LeaderBoard extends Component {
     }
 
     return (
-      <div>
+      <div >
         <h3 className='center'>Leader Board</h3>
         <ul className='dashboard-list'>
           {this.props.userId.map((id) => (

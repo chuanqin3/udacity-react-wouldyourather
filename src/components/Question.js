@@ -34,12 +34,12 @@ class QuestionList extends Component {
     const answeredByAuthedUserOrNotTwo = optionTwo.votes.indexOf(authedUser) === -1 ? false : true
 
     return (
-      <Link to={`/questions/${id}`}>
-        <Grid>
+      <Link to={`/questions/${id}`} className='linkable-box'>
+        <Grid className='border-box' padded>
           <Grid.Row>
-            <span>{userInfo.name} asks:</span>
+            <h5 className='user-asks'>{userInfo.name} asks:</h5>
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row className='user-image-poll'>
             <Grid.Column width={3}>
               <Image
                 size='tiny'

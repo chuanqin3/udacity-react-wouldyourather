@@ -9,31 +9,34 @@ class UserScore extends Component {
     } = this.props
 
     return (
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={3}>
-            <Image
-              size='tiny'
-              src={avatarURL}
-              alt={`Avatar of ${username}`}
-              className='avatar'
-            />
-          </Grid.Column>
-          <Grid.Column width={2}>
-            {username}
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <Grid.Row>
-              <span>Answered {answeredCount} polls</span>
-            </Grid.Row>
-            <Grid.Row>
-              <span>Created {createdCount} polls</span>
-            </Grid.Row>
-          </Grid.Column>
-          <Grid.Column width={2}>
-            Score {totalScore}
-          </Grid.Column>
-        </Grid.Row>
+      <Grid className="border-box" padded centered>
+        <Grid.Column width={2}>
+          <Image
+            size='tiny'
+            src={avatarURL}
+            alt={`Avatar of ${username}`}
+            className='avatar'
+          />
+        </Grid.Column>
+        <Grid.Column width={2}>
+          <h5 className='userscore-name'>{username}</h5>
+        </Grid.Column>
+        <Grid.Column width={3}>
+          <Grid.Row className='userscore-answered'>
+            <p>Answered {answeredCount} polls</p>
+          </Grid.Row>
+          <Grid.Row className='userscore-created'>
+            <p>Created {createdCount} polls</p>
+          </Grid.Row>
+        </Grid.Column>
+        <Grid.Column textAlign='center' width={2}>
+          <Grid.Row>
+            <b>Score</b>
+          </Grid.Row>
+          <Grid.Row className='userscore-score'>
+            <h1>{totalScore}</h1>
+          </Grid.Row>
+        </Grid.Column>
       </Grid>
     )
   }

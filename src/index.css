@@ -1,3 +1,7 @@
+.a {
+  color:#1b1c1d
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -37,6 +41,11 @@ li {
   text-decoration: none;
 }
 
+.linkable-box {
+  color: #1b1c1d;
+  text-decoration: none;
+}
+
 .avatar {
   height: 50px;
   border-radius: 25px;
@@ -46,4 +55,37 @@ li {
 /* used to add space after 'Unanswered polls' */
 .one-space-after {
   margin-right: 1em;
+}
+
+.border-box {
+  border-style: solid;
+  border-width: medium;
+  border-radius: 5px;
+}
+
+.userscore-name {
+  padding-top: 40px;
+}
+
+.userscore-answered {
+  padding-top: 25px;
+  padding-left: 20px;
+}
+
+.userscore-created {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.userscore-score {
+  padding-top: 20px;
+}
+
+.user-asks {
+  padding-left: 20px;
+  padding-bottom: 0px;
+}
+
+.user-image-poll {
+  padding: 0px;
 }
