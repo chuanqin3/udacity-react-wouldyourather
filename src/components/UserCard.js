@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Image, Button } from 'semantic-ui-react'
-import { setAuthedUser } from '../actions/authedUser';
+import { setAuthedUser } from '../actions/authedUser'
+import { withRouter } from 'react-router-dom'
+
 
 class UserCard extends Component {
   logInUser = (e, id) => {
     const { dispatch } = this.props
     dispatch(setAuthedUser(id))
+
+    // jump to homepage
+		this.props.history.push('/');
   }
 
   render() {
@@ -46,4 +51,4 @@ function mapStateToProps ({ users }, props) {
   }
 }
 
-export default connect(mapStateToProps)(UserCard)
+export default withRouter(connect(mapStateToProps)(UserCard))
