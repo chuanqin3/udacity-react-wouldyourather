@@ -43,6 +43,11 @@ class NewQuestion extends Component {
 
   render() {
     const { text1, text2, toHome } = this.state
+    const { authedUser } = this.props
+
+    if (authedUser === 'guest') {
+      return <Redirect to='/login' />
+    }
 
     if (toHome === true) {
       return <Redirect to='/' />
@@ -82,5 +87,11 @@ class NewQuestion extends Component {
   }
 }
 
+function mapStateToProps ({ authedUser }) {
+  return {
+    authedUser,
+  }
+}
+
 // inject just dispatch and don't listen to store
-export default connect()(NewQuestion)
+export default connect(mapStateToProps)(NewQuestion)
