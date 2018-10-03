@@ -3,7 +3,7 @@ import {
   _getQuestions,
   _saveQuestionAnswer,
   _saveQuestion,
-} from './_DATA2.js'
+} from './_DATA.js'
 
 // returns a single Promise that resolves when all of the promises in the iterable argument have resolved
 export function getInitialData () {

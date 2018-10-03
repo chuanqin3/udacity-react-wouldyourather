@@ -46,31 +46,6 @@ function mapStateToProps({ users }, { id }) {
   const createdCount = users[id].questions.length
   const totalScore = answeredCount + createdCount
 
-  // const avatarURL = userId.map(each => {
-  //   return users[each].avatarURL
-  // })
-
-  // const answeredCount = userId.map(each => {
-  //   return Object.keys(users[each].answers).length
-  // })
-
-  // const createdCount = userId.map(each => {
-  //   return users[each].questions.length
-  // })
-
-  // const totalScore = userId.map(each => {
-  //   return Object.keys(users[each].answers).length + users[each].questions.length
-  // })
-
-  // let userScore = {};
-  // userId.forEach((id, count) => userScore[id] = {
-  //   username: username[count],
-  //   avatarURL: avatarURL[count],
-  //   answeredCount: answeredCount[count],
-  //   createdCount: createdCount[count],
-  //   totalScore: totalScore[count],
-  // });
-
   return {
     username,
     avatarURL,

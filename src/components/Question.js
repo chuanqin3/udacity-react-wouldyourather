@@ -8,7 +8,7 @@ class QuestionList extends Component {
   handleVote = (e, id) => {
     e.preventDefault()
 
-    const { dispatch, question, authedUser } = this.props
+    const { dispatch, question } = this.props
     let option = e.target.name;
 
     dispatch(handleVoteQuestion({
@@ -67,12 +67,11 @@ class QuestionList extends Component {
 // need to grab authedUser, users, tweets from the state of Store
 // { id } will be passed from Dashboard as a prop
 // use the id from Dashboard to query the relevant tweets from the state of Store
-function mapStateToProps ({authedUser, users, questions}, { id }) {
+function mapStateToProps ({ users, questions}, { id }) {
   const question = questions[id]
   const userInfo = users[question.author]
 
   return {
-    authedUser,
     userInfo,
     question,
   }

@@ -6,7 +6,7 @@ class QuestionPage extends Component {
   render() {
     const { authedUser, username, optionOne, optionTwo, avatarURL } = this.props
     const totalVotesCount = optionOne.votes.length + optionTwo.votes.length
-    const optionOnePercent = (optionOne.votes.length / totalVotesCount) * 100
+    const optionOnePercent = Math.round((optionOne.votes.length / totalVotesCount) * 100)
     let authedUserChoice = "You would rather "
     if (optionOne.votes.indexOf(authedUser) !== -1) {
       authedUserChoice = authedUserChoice.concat(optionOne.text)
@@ -40,8 +40,8 @@ class QuestionPage extends Component {
             </Grid.Row>
             <Grid.Row>
               <Progress percent={optionOnePercent} progress>
-                Out of {totalVotesCount} people who answered, 
-                {optionOne.votes.length} rather {optionOne.text}, 
+                Out of {totalVotesCount} people who answered,
+                {optionOne.votes.length} rather {optionOne.text},
                 {optionTwo.votes.length} rather {optionTwo.text}
               </Progress>
             </Grid.Row>

@@ -4,7 +4,7 @@ import { receiveQuestions } from './questions'
 import { setAuthedUser } from '../actions/authedUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
-const AUTHED_ID = 'guest'
+const Default_ID = 'guest'
 
 // below is a thunk action creator, whose basic format is:
 // function handleInitialData () {
@@ -27,7 +27,7 @@ export function handleInitialData () {
         // Dispatch action creators. This is the only way to trigger a state change.
         dispatch(receiveUsers(users))
         dispatch(receiveQuestions(questions))
-        dispatch(setAuthedUser(AUTHED_ID))
+        dispatch(setAuthedUser(Default_ID))
         dispatch(hideLoading())
       })
   }
