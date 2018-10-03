@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
 import { Checkbox } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component {
   state = {
@@ -16,10 +17,15 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { authedUser } = this.props
+    if (authedUser === 'guest') {
+      return <Redirect to='/login' />
+    }
+
     const { questions, answeredQuestionsId, unansweredQuestionsId } = this.props
     let unansweredIdSorted = unansweredQuestionsId.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
     let answeredIdSorted = answeredQuestionsId.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
-    
+
     return (
       <div>
         <span className='view-toggle'>Unanswered polls</span><Checkbox slider label='Answered polls' onChange={this.handleViewToggle} />
@@ -50,6 +56,7 @@ function mapStateToProps ({ authedUser, questions }) {
   const allQuestionIds = Object.keys(questions)
 
   return {
+    authedUser,
     questions,
     answeredQuestionsId: allQuestionIds
       .filter(each =>
