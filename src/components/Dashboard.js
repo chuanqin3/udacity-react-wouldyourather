@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Question from './Question'
+import QuestionList from './QuestionList'
 import { Checkbox } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 
@@ -33,7 +33,7 @@ class Dashboard extends Component {
           <ul className='dashboard-list'>
             {unansweredIdSorted.map((id) => (
               <li key={id}>
-                <Question id={id}/>
+                <QuestionList id={id}/>
               </li>
             ))}
           </ul>
@@ -41,7 +41,7 @@ class Dashboard extends Component {
           <ul className='dashboard-list'>
             {answeredIdSorted.map((id) => (
               <li key={id}>
-                <Question id={id}/>
+                <QuestionList id={id}/>
               </li>
             ))}
           </ul>

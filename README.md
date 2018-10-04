@@ -15,3 +15,28 @@ If you prefer to use `yarn`, you are welcome to use it.
 
 ### Component Tree
 The relationship between Components are as shown below:
+
+```
+APP
+|
+|--- LogStatus
+|
+|--- Nav
+|
+|--- Dashboard ('/')
+|         |
+|         └--- QuestionList
+|                 |
+|                 └--- SingleQuestionDetail
+|
+|--- NewQuestion ('/add')
+|
+|--- LeaderBoard ('/leaderboard)
+|         |
+|         └--- UserScore
+|
+└--- LoginForm ('/login')
+         |
+         └--- UserCard
+
+```
