@@ -14,7 +14,7 @@ and run the following commands:
 If you prefer to use `yarn`, you are welcome to use it.
 
 ### Component Tree
-The relationship between Components are as shown below:
+The relationship between Components is as shown below:
 
 ```
 APP
