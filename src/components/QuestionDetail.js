@@ -23,8 +23,8 @@ class QuestionPage extends Component {
 
     return (
       <Grid>
-        <Grid.Row>
-          <Header as='h3' textAlign='center'>Would You Rather?</Header>
+        <Grid.Row className='q-detail-title'>
+          <Header as='h3'>Would You Rather?</Header>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={3}>
@@ -32,22 +32,24 @@ class QuestionPage extends Component {
               size='tiny'
               src={avatarURL}
               alt={`Avatar of ${username}`}
-              className='avatar'
+              className='avatar q-detail-avatar'
             />
             <Header as='h5'>Posted by {username}</Header>
           </Grid.Column>
           <Grid.Column width={13}>
-            <Grid.Row>
+            <Grid.Row className='user-choice'>
               <span>{authedUserChoice}</span>
             </Grid.Row>
             <Grid.Row>
-              <span>Below bar showed how many answerers rather {optionOne.text}...</span>
+              <span>Below bar shows how many answerers rather {optionOne.text}...</span>
             </Grid.Row>
             <Grid.Row>
               <Progress percent={optionOnePercent} progress>
-                Out of {totalVotesCount} people who answered,
-                {optionOne.votes.length} rather {optionOne.text},
-                {optionTwo.votes.length} rather {optionTwo.text}
+                <p>
+                  Out of {totalVotesCount} people who answered, &ensp;
+                  {optionOne.votes.length} rather {optionOne.text}, &ensp;
+                  {optionTwo.votes.length} rather {optionTwo.text}
+                </p>
               </Progress>
             </Grid.Row>
           </Grid.Column>

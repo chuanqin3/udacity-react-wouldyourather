@@ -21,7 +21,7 @@ class LogStatus extends Component {
 
 		return (
 			<div className='right'>
-				<a className='one-space-after'>Hello, {userInfo.name}</a>
+				<a className='one-space-after hello-user'>Hello, {userInfo.name}</a>
 				{authedUser !== 'guest'
 					? <Button basic compact onClick={e => this.jumpToLoginPage(e, authedUser)}>Logout</Button>
 					: <Button basic compact onClick={e => this.jumpToLoginPage(e, authedUser)}>Log In</Button>
