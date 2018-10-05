@@ -4,31 +4,25 @@ import { Button } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import { setAuthedUser } from '../actions/authedUser';
 
-class LogStatus extends Component {
-	jumpToLoginPage = (e, authedUser) => {
-		// logout from current authentication. If already a guest, simply jump to login page
-		const { dispatch } = this.props
+const LogStatus = ({ authedUser, userInfo, dispatch, history }) => {
+	const jumpToLoginPage = (e, authedUser) => {
 		if (authedUser !== 'guest') {
 			dispatch(setAuthedUser('guest'))
 		}
 
 		// jump to login page
-		this.props.history.push('/login');
+		history.push('/login');
 	}
 
-	render() {
-		const { userInfo, authedUser } = this.props
-
-		return (
-			<div className='right'>
-				<a className='one-space-after hello-user'>Hello, {userInfo.name}</a>
-				{authedUser !== 'guest'
-					? <Button basic compact onClick={e => this.jumpToLoginPage(e, authedUser)}>Logout</Button>
-					: <Button basic compact onClick={e => this.jumpToLoginPage(e, authedUser)}>Log In</Button>
-				}
-			</div>
-		)
-	}
+	return (
+		<div className='right'>
+			<a className='one-space-after hello-user'>Hello, {userInfo.name}</a>
+			{authedUser !== 'guest'
+				? <Button basic compact onClick={e => jumpToLoginPage(e, authedUser)}>Logout</Button>
+				: <Button basic compact onClick={e => jumpToLoginPage(e, authedUser)}>Log In</Button>
+			}
+		</div>
+	)
 }
 
 function mapStateToProps({ users, authedUser }) {
