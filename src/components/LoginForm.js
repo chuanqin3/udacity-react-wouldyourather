@@ -1,31 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import UserCard from './UserCard'
 import { Message } from 'semantic-ui-react'
 
-class LoginForm extends Component {
-  render() {
-    let { userIds, authedUser } = this.props
-    userIds = userIds.filter(each => each !== 'guest')
+const LoginForm = ({ userIds, authedUser }) => {
+  userIds = userIds.filter(each => each !== 'guest')
 
-    return (
-      <div>
-        {authedUser === 'guest'
-          ? <Message warning>
-              <Message.Header>You must log in to view, vote, and create polls!</Message.Header>
-            </Message>
-          : null
-        }
-        <ul className='dashboard-list'>
-          {userIds.map((id) => (
-            <li key={id}>
-              <UserCard id={id}/>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
-  }
+  return (
+    <div>
+      {authedUser === 'guest'
+        ? <Message warning>
+            <Message.Header>You must log in to view, vote, and create polls!</Message.Header>
+          </Message>
+        : null
+      }
+      <ul className='dashboard-list'>
+        {userIds.map((id) => (
+          <li key={id}>
+            <UserCard id={id}/>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
 
 function mapStateToProps ({ users, authedUser }) {
