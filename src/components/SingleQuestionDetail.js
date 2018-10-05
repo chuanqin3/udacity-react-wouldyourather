@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Progress, Image, Grid, Header } from 'semantic-ui-react'
 
@@ -37,18 +37,23 @@ const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avat
           <Grid.Row className='user-choice'>
             <span>{authedUserChoice}</span>
           </Grid.Row>
-          <Grid.Row>
-            <span>Below bar shows how many answerers rather {optionOne.text}...</span>
-          </Grid.Row>
-          <Grid.Row>
-            <Progress percent={optionOnePercent} progress>
-              <p>
-                Out of {totalVotesCount} people who answered, &ensp;
-                {optionOne.votes.length} rather {optionOne.text}, &ensp;
-                {optionTwo.votes.length} rather {optionTwo.text}
-              </p>
-            </Progress>
-          </Grid.Row>
+          {authedUserChoice === 'You have not voted yet! Please go back to the Homepage and vote.'
+            ? null
+            : <Fragment>
+                <Grid.Row>
+                  <span>Below bar shows how many answerers rather {optionOne.text}...</span>
+                </Grid.Row>
+                <Grid.Row>
+                  <Progress percent={optionOnePercent} progress>
+                    <p>
+                      Out of {totalVotesCount} people who answered, &ensp;
+                      {optionOne.votes.length} rather {optionOne.text}, &ensp;
+                      {optionTwo.votes.length} rather {optionTwo.text}
+                    </p>
+                  </Progress>
+                </Grid.Row>
+              </Fragment>
+          }
         </Grid.Column>
       </Grid.Row>
     </Grid>
