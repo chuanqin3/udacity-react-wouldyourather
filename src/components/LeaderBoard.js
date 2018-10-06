@@ -3,26 +3,23 @@ import { connect } from 'react-redux'
 import UserScore from './UserScore'
 import { Redirect } from 'react-router-dom'
 
-class LeaderBoard extends Component {
-  render() {
-    const { authedUser } = this.props
-    if (authedUser === 'guest') {
-      return <Redirect to='/login' />
-    }
-
-    return (
-      <div >
-        <h3 className='center'>Leader Board</h3>
-        <ul className='dashboard-list'>
-          {this.props.userId.map((id) => (
-            <li key={id}>
-              <UserScore id={id}/>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
+const LeaderBoard = ({ userId, authedUser }) => {
+  if (authedUser === 'guest') {
+    return <Redirect to='/login' />
   }
+
+  return (
+    <div >
+      <h3 className='center'>Leader Board</h3>
+      <ul className='dashboard-list'>
+        {userId.map((id) => (
+          <li key={id}>
+            <UserScore id={id}/>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
 
 function mapStateToProps({ authedUser, users }) {
