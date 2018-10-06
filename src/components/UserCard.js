@@ -5,7 +5,8 @@ import { setAuthedUser } from '../actions/authedUser'
 import { withRouter } from 'react-router-dom'
 
 
-const UserCard = ({ dispatch, userInfo, history }) => {
+const UserCard = ({ dispatch, userInfo, history, location }) => {
+  console.log(location)
   const logInUser = (e, id) => {
     dispatch(setAuthedUser(id))
 

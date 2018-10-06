@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
@@ -10,6 +10,7 @@ import LeaderBoard from './LeaderBoard'
 import Nav from './Nav'
 import LogStatus from './LogStatus'
 import LoginForm from './LoginForm'
+import NoMatch from './NoMatch'
 
 class App extends Component {
   // load the state from Store
@@ -31,11 +32,14 @@ class App extends Component {
               : <div>
                   <LogStatus />
                   <Nav />
-                  <Route path='/' exact component={Dashboard} />
-                  <Route path='/questions/:id' component={SingleQuestionDetail} />
-                  <Route path='/add' component={NewQuestion} />
-                  <Route path='/leaderboard' component={LeaderBoard} />
-                  <Route path='/login' component={LoginForm} />
+                  <Switch>
+                    <Route path='/' exact component={Dashboard} />
+                    <Route path='/questions/:id' component={SingleQuestionDetail} />
+                    <Route path='/add' component={NewQuestion} />
+                    <Route path='/leaderboard' component={LeaderBoard} />
+                    <Route path='/login' component={LoginForm} />
+                    <Route component={NoMatch} />
+                  </Switch>
                 </div>}
           </div>
         </Fragment>
