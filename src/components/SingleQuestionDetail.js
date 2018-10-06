@@ -5,8 +5,13 @@ import { withRouter, Redirect } from 'react-router-dom'
 import { Progress, Image, Grid, Header, Button } from 'semantic-ui-react'
 
 const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avatarURL, question, id, dispatch, history }) => {
-  if (question === null || optionOne === null || optionTwo === null) {
-    alert("This question doesn't exist. You will be redirected to Login Page")
+  if (question === null || optionOne === null || optionTwo === null ) {
+    alert("The url you inputed is invalid. You will be redirected to Login page.")
+    return <Redirect to='/login' />
+  }
+
+  if (authedUser === 'guest') {
+    alert("You are not logged. You will be redirected to Login Page")
     return <Redirect to='/login' />
   }
 
