@@ -95,20 +95,24 @@ const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avat
 function mapStateToProps ({ authedUser, questions, users }, props) {
   const { id } = props.match.params
   const question = questions[id]
-  const optionOne = questions[id] ? questions[id].optionOne : null
-  const optionTwo = questions[id] ? questions[id].optionTwo : null
   const authorId = questions[id] ? questions[id].author : null
-  const username = users[authorId] ? users[authorId].name : null
-  const avatarURL = users[authorId] ? users[authorId].avatarURL : null
 
   return {
     id,
     question,
     authedUser,
-    optionOne,
-    optionTwo,
-    username,
-    avatarURL,
+    optionOne: question
+      ? questions[id].optionOne
+      : null,
+    optionTwo: question
+      ? questions[id].optionTwo
+      : null,
+    username: users[authorId]
+      ? users[authorId].name
+      : null,
+    avatarURL: users[authorId]
+      ? users[authorId].avatarURL
+      : null,
   }
 }
 

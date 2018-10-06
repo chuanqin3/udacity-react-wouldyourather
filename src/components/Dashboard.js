@@ -9,12 +9,7 @@ class Dashboard extends Component {
     showUnanswered: true,
   }
 
-  handleViewToggle = () => {
-    let boolean = this.state.showUnanswered === true ? false : true
-    this.setState(
-      {showUnanswered: boolean},
-    )
-  }
+  handleViewToggle = () => this.setState(({ showUnanswered }) => ({ showUnanswered: !showUnanswered }));
 
   render() {
     const { authedUser } = this.props
