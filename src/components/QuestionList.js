@@ -1,33 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { handleVoteQuestion } from '../actions/questions'
-import { Link, withRouter } from 'react-router-dom'
-import { Button, Header, Grid, Image } from 'semantic-ui-react'
+import { Link, withRouter, Redirect } from 'react-router-dom'
+import { Header, Grid, Image } from 'semantic-ui-react'
 
-const QuestionList = ({ question, userInfo, authedUser, dispatch, history }) => {
-  const handleVote = (e, id) => {
-    e.preventDefault()
-
-    let option = e.target.name;
-
-    dispatch(handleVoteQuestion({
-      qid: question.id,
-      answer: option,
-    }))
-
-    // todo: redirect to poll detail page
-    history.push(`/questions/${id}`)
+const QuestionList = ({ question, userInfo }) => {
+  if (question === null) {
+    alert("This question doesn't exist. You will be redirected to Login Page")
+    return <Redirect to='/login' />
   }
 
-    if (question === null) {
-      return <p>This question doesn't exist</p>
-    }
-
-    // destructing the tweet Object
-    const { id, optionOne, optionTwo } = question
-    const answeredByAuthedUserOrNot = (optionOne.votes.indexOf(authedUser) + optionTwo.votes.indexOf(authedUser)) === -2 ? false : true
-    const answeredByAuthedUserOrNotOne = optionOne.votes.indexOf(authedUser) === -1 ? false : true
-    const answeredByAuthedUserOrNotTwo = optionTwo.votes.indexOf(authedUser) === -1 ? false : true
+  // destructing the tweet Object
+  const { id, optionOne, optionTwo } = question
 
   return (
     <Link to={`/questions/${id}`} className='linkable-box'>
@@ -46,12 +29,8 @@ const QuestionList = ({ question, userInfo, authedUser, dispatch, history }) => 
           </Grid.Column>
           <Grid.Column width={13}>
             <Header as='h5'>Would you rather...</Header>
-            <Button active={answeredByAuthedUserOrNotOne} disabled={answeredByAuthedUserOrNot} className='ui button toggle' onClick={e => handleVote(e, id)} name="optionOne">
-              {optionOne.text}
-            </Button>
-            <Button active={answeredByAuthedUserOrNotTwo} disabled={answeredByAuthedUserOrNot} className='ui button toggle' onClick={e => handleVote(e, id)} name="optionTwo">
-              {optionTwo.text}
-            </Button>
+            <p>{optionOne.text} ?</p>
+            <p>or {optionTwo.text} ?</p>
           </Grid.Column>
         </Grid.Row>
       </Grid>

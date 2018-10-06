@@ -1,21 +1,42 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Progress, Image, Grid, Header } from 'semantic-ui-react'
+import { handleVoteQuestion } from '../actions/questions'
+import { withRouter, Redirect } from 'react-router-dom'
+import { Progress, Image, Grid, Header, Button } from 'semantic-ui-react'
 
-const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avatarURL }) => {
-  if (optionOne === null || optionTwo === null) {
-    return <p>This question doesn't exist. Make sure you type the correct url!</p>
+const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avatarURL, question, id, dispatch, history }) => {
+  if (question === null || optionOne === null || optionTwo === null) {
+    alert("This question doesn't exist. You will be redirected to Login Page")
+    return <Redirect to='/login' />
   }
 
+  const answeredByAuthedUserOrNot = (optionOne.votes.indexOf(authedUser) + optionTwo.votes.indexOf(authedUser)) === -2 ? false : true
+  const answeredByAuthedUserOrNotOne = optionOne.votes.indexOf(authedUser) === -1 ? false : true
+  const answeredByAuthedUserOrNotTwo = optionTwo.votes.indexOf(authedUser) === -1 ? false : true
   const totalVotesCount = optionOne.votes.length + optionTwo.votes.length
   const optionOnePercent = Math.round((optionOne.votes.length / totalVotesCount) * 100)
+
   let authedUserChoice = "You would rather "
   if (optionOne.votes.indexOf(authedUser) !== -1) {
     authedUserChoice = authedUserChoice.concat(optionOne.text)
   } else if (optionTwo.votes.indexOf(authedUser) !== -1) {
     authedUserChoice = authedUserChoice.concat(optionTwo.text)
   } else {
-    authedUserChoice = "You have not voted yet! Please go back to the Homepage and vote."
+    authedUserChoice = "You have not voted yet! Please vote now by clicking one of the buttons below. You have only one chance!"
+  }
+
+  const handleVote = (e, id) => {
+    e.preventDefault()
+
+    let option = e.target.name;
+
+    dispatch(handleVoteQuestion({
+      qid: question.id,
+      answer: option,
+    }))
+
+    // todo: redirect to poll detail page
+    history.push(`/questions/${id}`)
   }
 
   return (
@@ -37,7 +58,13 @@ const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avat
           <Grid.Row className='user-choice'>
             <span>{authedUserChoice}</span>
           </Grid.Row>
-          {authedUserChoice === 'You have not voted yet! Please go back to the Homepage and vote.'
+              <Button active={answeredByAuthedUserOrNotOne} disabled={answeredByAuthedUserOrNot} className='ui button toggle' onClick={e => handleVote(e, id)} name="optionOne">
+                {optionOne.text}
+              </Button>
+              <Button active={answeredByAuthedUserOrNotTwo} disabled={answeredByAuthedUserOrNot} className='ui button toggle' onClick={e => handleVote(e, id)} name="optionTwo">
+                {optionTwo.text}
+              </Button>
+          {authedUserChoice === 'You have not voted yet! Please vote now by clicking one of the buttons below. You have only one chance!'
             ? null
             : <Fragment>
                 <Grid.Row>
@@ -62,6 +89,7 @@ const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avat
 
 function mapStateToProps ({ authedUser, questions, users }, props) {
   const { id } = props.match.params
+  const question = questions[id]
   const optionOne = questions[id] ? questions[id].optionOne : null
   const optionTwo = questions[id] ? questions[id].optionTwo : null
   const authorId = questions[id] ? questions[id].author : null
@@ -70,6 +98,7 @@ function mapStateToProps ({ authedUser, questions, users }, props) {
 
   return {
     id,
+    question,
     authedUser,
     optionOne,
     optionTwo,
@@ -78,4 +107,4 @@ function mapStateToProps ({ authedUser, questions, users }, props) {
   }
 }
 
-export default connect(mapStateToProps)(SingleQuestionDetail)
+export default withRouter(connect(mapStateToProps)(SingleQuestionDetail))
