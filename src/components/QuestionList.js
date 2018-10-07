@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import { Link, withRouter, Redirect } from 'react-router-dom'
 import { Header, Grid, Image } from 'semantic-ui-react'
 
-const QuestionList = ({ question, userInfo }) => {
+const QuestionList = ({ question, userInfo, location }) => {
   if (question === null) {
     alert("This question doesn't exist. You will be redirected to Login Page")
-    return <Redirect to='/login' />
+    return <Redirect
+    to={{
+      pathname: '/login', // where you want to redirect the user to
+      state: { from: location.pathname } // save the location where you came from before going to '/login'. accessible in props
+    }}
+  />
   }
 
   // destructing the tweet Object

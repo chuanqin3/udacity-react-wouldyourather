@@ -43,10 +43,15 @@ class NewQuestion extends Component {
 
   render() {
     const { text1, text2, toHome } = this.state
-    const { authedUser } = this.props
+    const { authedUser, location } = this.props
 
     if (authedUser === 'guest') {
-      return <Redirect to='/login' />
+      return <Redirect
+      to={{
+        pathname: '/login', // where you want to redirect the user to
+        state: { from: location.pathname } // save the location where you came from before going to '/login'. accessible in props
+      }}
+    />
     }
 
     if (toHome === true) {

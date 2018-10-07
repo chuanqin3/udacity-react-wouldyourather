@@ -3,9 +3,15 @@ import { connect } from 'react-redux'
 import UserScore from './UserScore'
 import { Redirect } from 'react-router-dom'
 
-const LeaderBoard = ({ userId, authedUser }) => {
+const LeaderBoard = ({ userId, authedUser, location }) => {
   if (authedUser === 'guest') {
-    return <Redirect to='/login' />
+    return <Redirect
+    to={{
+      pathname: '/login', // where you want to redirect the user to
+      state: { from: location.pathname } // save the location where you came from before going to '/login'. accessible in props
+    }}
+  />
+
   }
 
   return (
