@@ -4,15 +4,19 @@ import { handleVoteQuestion } from '../actions/questions'
 import { withRouter, Redirect } from 'react-router-dom'
 import { Progress, Image, Grid, Header, Button } from 'semantic-ui-react'
 
-const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avatarURL, question, id, dispatch, history }) => {
-  if (question === null || optionOne === null || optionTwo === null ) {
-    alert("The url you inputed is invalid. You will be redirected to Login page.")
-    return <Redirect to='/login' />
-  }
-
+const SingleQuestionDetail = ({ authedUser, username, optionOne, optionTwo, avatarURL, question, id, dispatch, history, location }) => {
   if (authedUser === 'guest') {
     alert("You are not logged. You will be redirected to Login Page")
-    return <Redirect to='/login' />
+    return <Redirect
+      to={{
+        pathname: '/login', // where you want to redirect the user to
+        state: { from: location.pathname } // save the location where you came from before going to '/login'. accessible in props
+      }}
+    />
+  }
+
+  if (question === null || optionOne === null || optionTwo === null ) {
+    return <Redirect to='/error' />
   }
 
   const answeredByAuthedUserOrNot = (optionOne.votes.indexOf(authedUser) + optionTwo.votes.indexOf(authedUser)) === -2 ? false : true

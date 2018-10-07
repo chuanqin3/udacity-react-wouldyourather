@@ -6,12 +6,14 @@ import { withRouter } from 'react-router-dom'
 
 
 const UserCard = ({ dispatch, userInfo, history, location }) => {
-  console.log(location)
+  // if the previous page is available, get `from` from it; it not, go to homepage
+  const { from } = location.state || { from: '/' };
+
   const logInUser = (e, id) => {
     dispatch(setAuthedUser(id))
 
-    // jump to homepage
-		history.push('/');
+    // push to this 'from' path instead
+		history.push(from);
   }
 
     const avatarURL = userInfo.avatarURL
